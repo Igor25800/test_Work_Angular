@@ -1,4 +1,4 @@
-<main *ngIf="college">
+<main *ngIf="collegeInfo$ | async as college">
     <section class="content-menu content-menu-border">
         <div class="paralax"></div>
         <div class="container header-block">

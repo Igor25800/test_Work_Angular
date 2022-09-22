@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {COLLEGE_ABOUT$} from '../../shared/providers/about.providers';
-import {Observable} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import {AboutInterface} from '../../shared/interfaces/about.interface';
 import {aboutCollege$} from '../../shared/utils/collage';
 
@@ -15,7 +15,7 @@ import {aboutCollege$} from '../../shared/utils/collage';
 })
 
 export class CollegeComponent implements OnInit {
-    college?: AboutInterface;
+    collegeInfo$?: Observable<AboutInterface> = new Subject();
 
     constructor(
         @Inject(COLLEGE_ABOUT$) readonly college$: Observable<AboutInterface>
@@ -27,8 +27,6 @@ export class CollegeComponent implements OnInit {
     }
 
     getCollege(): void {
-        this.college$.subscribe(college => {
-            this.college = college;
-        });
+        this.collegeInfo$ = this.college$;
     }
 }
